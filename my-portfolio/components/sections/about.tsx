@@ -61,7 +61,7 @@ export default function About({ theme }: AboutProps) {
               <CardContent className="p-6">
                 <h3 className={`text-xl font-semibold mb-4 ${getTextColor()}`}>My Story</h3>
                 <p className={`${getTextColor()} opacity-90 mb-4`}>
-                  I'm a passionate software developer with over 3 years of experience creating web applications and providing solutions. 
+                  I&apos;m a passionate software developer with over 3 years of experience creating web applications and providing solutions. 
                   My journey began with a curiosity about how websites work, which led me to pursue a degree in Computer
                   Science.
                 </p>

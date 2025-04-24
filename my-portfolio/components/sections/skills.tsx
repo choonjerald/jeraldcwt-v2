@@ -104,7 +104,7 @@ export default function Skills({ theme }: SkillsProps) {
           </h2>
           <div className={`h-1 w-20 mx-auto ${getHighlightColor().replace("text", "bg")}`}></div>
           <p className={`mt-4 max-w-2xl mx-auto ${getTextColor()} opacity-90`}>
-            I've worked with a variety of technologies in the web development world. Here's an overview of my technical
+            I&apos;ve worked with a variety of technologies in the web development world. Here&apos;s an overview of my technical
             skills.
           </p>
         </motion.div>

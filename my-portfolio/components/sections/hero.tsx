@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowDown, Github, Linkedin, Twitter } from "lucide-react"
+import { ArrowDown, Github, Linkedin} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { ThemeType } from "@/components/theme-selector"
 
@@ -40,7 +40,7 @@ export default function Hero({ theme }: HeroProps) {
           className="text-center mb-8"
         >
           <h1 className={`text-4xl md:text-6xl font-bold mb-4 ${getTextColor()}`}>
-            Hi, I'm <span className={getHighlightColor()}>Jerald Choon</span>
+            Hi, I&apos;m <span className={getHighlightColor()}>Jerald Choon</span>
           </h1>
           <h2 className={`text-xl md:text-2xl mb-6 ${getTextColor()} opacity-90`}>Software Developer</h2>
           <p className={`text-lg max-w-2xl mx-auto mb-8 ${getTextColor()} opacity-80`}>
