@@ -71,8 +71,10 @@ export default function Contact({ theme }: ContactProps) {
     e.preventDefault()
     // Handle form submission logic here
     console.log(formData)
-    alert("Message sent! (This is a demo)")
     setFormData({ name: "", email: "", message: "" })
+    const form = e.target as HTMLFormElement
+    form.submit()
+    alert("Message sent!")
   }
 
   return (
@@ -145,7 +147,7 @@ export default function Contact({ theme }: ContactProps) {
               <CardContent className="p-6">
                 <h3 className={`text-xl font-semibold mb-6 ${getTextColor()}`}>Send Me a Message</h3>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <Input
                       type="text"

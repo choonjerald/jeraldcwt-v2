@@ -59,6 +59,15 @@ export default function Projects({ theme }: ProjectsProps) {
       technologies: ["SpringBoot", "Java", "MySQL"],
       liveUrl: "https://licence1.business.gov.sg/licence1/authentication/mainLogin.action",
     },
+    ,
+    {
+      title: "Comic-maker",
+      description:
+        "PureEdgeSim: A simulation toolkit for performance evaluation of Edge and Mist computing environments",
+      image: "/comic-maker.png",
+      technologies: ["Java", "CSS"],
+      githubUrl: "https://github.com/jsn-t/comic-maker",
+    },
   ]
 
   return (
@@ -113,28 +122,28 @@ export default function Projects({ theme }: ProjectsProps) {
                   </div>
 
                   <div className="flex justify-between mt-auto">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-1 ${getHighlightColor()} hover:opacity-80 transition-opacity`}
-                    >
-                      <ExternalLink size={16} />
-                      <span>Website</span>
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-1 ${getHighlightColor()} hover:opacity-80 transition-opacity`}
-                    >
-                      <Github size={16} />
-                      <span>Code</span>
-                    </a>
-                  )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-1 ${getHighlightColor()} hover:opacity-80 transition-opacity`}
+                      >
+                        <ExternalLink size={16} />
+                        <span>Website</span>
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-1 ${getHighlightColor()} hover:opacity-80 transition-opacity`}
+                      >
+                        <Github size={16} />
+                        <span>Code</span>
+                      </a>
+                    )}
                   </div>
                 </CardContent>
               </Card>

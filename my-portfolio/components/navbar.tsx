@@ -49,7 +49,7 @@ export default function Navbar({ currentTheme, onThemeChange }: NavbarProps) {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <a href="#home" className={`text-xl font-bold ${getTextColor()}`}>
-              DevPortfolio
+              Dev.Portfolio
             </a>
           </div>
 

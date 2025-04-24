@@ -35,7 +35,7 @@ export default function Footer({ theme }: FooterProps) {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center">
           <p className={`text-center ${getTextColor()} opacity-90 flex items-center gap-1`}>
-            Made with <Heart className={`${getHighlightColor()}`} size={16} /> by Alex Chen
+            Made with <Heart className={`${getHighlightColor()}`} size={16} /> by Jerald Choon
           </p>
           <p className={`text-center mt-2 ${getTextColor()} opacity-70`}>&copy; {currentYear} All Rights Reserved</p>
         </div>

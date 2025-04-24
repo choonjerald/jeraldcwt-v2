@@ -44,25 +44,26 @@ export default function Hero({ theme }: HeroProps) {
           </h1>
           <h2 className={`text-xl md:text-2xl mb-6 ${getTextColor()} opacity-90`}>Software Developer</h2>
           <p className={`text-lg max-w-2xl mx-auto mb-8 ${getTextColor()} opacity-80`}>
-          With a strong focus on public sector digitalization, I specialize in developing and enhancing software solutions for government agencies and licensing management systems.
+            With a strong focus on public sector digitalization, I specialize in developing and enhancing software solutions for government agencies and licensing management systems.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <Button
+            {/* <Button
               size="lg"
               className={`${theme === "night" ? "bg-white text-gray-900" : "bg-gray-900 text-white"} hover:opacity-90`}
             >
               View My Work
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className={`${
-                theme === "night" ? "border-white text-white" : "border-gray-900 text-gray-900"
-              } hover:opacity-90`}
-            >
-              Download Resume
-            </Button>
+            </Button> */}
+            <a href="/resume.pdf" download>
+              <Button
+                size="lg"
+                variant="outline"
+                className={`${theme === "night" ? "border-white text-white" : "border-gray-900 text-gray-900"
+                  } hover:opacity-90`}
+              >
+                Download Resume
+              </Button>
+            </a>
           </div>
 
           <div className="flex justify-center space-x-6 mb-16">
