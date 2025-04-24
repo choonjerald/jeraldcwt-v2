@@ -55,7 +55,7 @@ export default function Projects({ theme }: ProjectsProps) {
       title: "goBusiness Licensing",
       description:
         "GoBusiness Licensing is a business licensing portal that aims to deliver a more user-friendly and efficient licensing experience for businesses.",
-      image: "/gb-logo.svg?height=300&width=500",
+      image: "/gb-logo.svg",
       technologies: ["SpringBoot", "Java", "MySQL"],
       liveUrl: "https://licence1.business.gov.sg/licence1/authentication/mainLogin.action",
     },
@@ -106,7 +106,7 @@ export default function Projects({ theme }: ProjectsProps) {
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 hover:scale-105"
+                    className="w-full h-48 object-contain transition-transform duration-500 hover:scale-105"
                   />
                 </div>
                 <CardContent className="p-6 flex-grow flex flex-col">

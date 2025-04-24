@@ -58,8 +58,8 @@ export default function Skills({ theme }: SkillsProps) {
   ]
 
   const backendSkills = [
-    { name: "Node.js", level: 85 },
-    { name: "MySQL", level: 80 },
+    { name: "MySQL", level: 90 },
+    { name: "Node.js", level: 75 },
     { name: "PostgreSQL", level: 70 },
     { name: "Mendix", level: 70 },
   ]
