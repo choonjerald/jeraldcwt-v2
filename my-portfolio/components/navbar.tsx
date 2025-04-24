@@ -81,14 +81,14 @@ export default function Navbar({ currentTheme, onThemeChange }: NavbarProps) {
 
         {/* Mobile Menu */}
         {isMobile && (
-          <motion.div
+          <div className="overflow-hidden">
+            <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{
               height: mobileMenuOpen ? "auto" : 0,
               opacity: mobileMenuOpen ? 1 : 0,
             }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden"
           >
             <ul className="py-2 space-y-2">
               {navItems.map((item) => (
@@ -104,6 +104,7 @@ export default function Navbar({ currentTheme, onThemeChange }: NavbarProps) {
               ))}
             </ul>
           </motion.div>
+          </div>
         )}
       </div>
     </header>

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowDown, Github, Linkedin} from "lucide-react"
+import { ArrowDown, Github, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { ThemeType } from "@/components/theme-selector"
 
