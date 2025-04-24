@@ -63,7 +63,7 @@ export default function Projects({ theme }: ProjectsProps) {
     {
       title: "Comic-maker",
       description:
-        "PureEdgeSim: A simulation toolkit for performance evaluation of Edge and Mist computing environments",
+        "Java Application to create comic strips and to publish them as HTML pages or GIFs",
       image: "/comic-maker.png",
       technologies: ["Java", "CSS"],
       githubUrl: "https://github.com/jsn-t/comic-maker",
