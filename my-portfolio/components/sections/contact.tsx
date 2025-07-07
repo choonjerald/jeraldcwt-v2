@@ -67,14 +67,19 @@ export default function Contact({ theme }: ContactProps) {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log(formData)
-    setFormData({ name: "", email: "", message: "" })
-    const form = e.target as HTMLFormElement
-    form.submit()
-    alert("Message sent!")
+    const formData = new FormData(e.currentTarget)
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => {
+        alert("Message sent!")
+        setFormData({ name: "", email: "", message: "" })
+      })
+      .catch((error) => alert(error))
   }
 
   return (
@@ -147,7 +152,20 @@ export default function Contact({ theme }: ContactProps) {
               <CardContent className="p-6">
                 <h3 className={`text-xl font-semibold mb-6 ${getTextColor()}`}>Send Me a Message</h3>
 
-                <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-4">
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p className="hidden">
+                    <label>
+                      Don't fill this out if you're human: <input name="bot-field" />
+                    </label>
+                  </p>
                   <div>
                     <Input
                       type="text"
