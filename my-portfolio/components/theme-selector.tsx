@@ -49,7 +49,7 @@ export default function ThemeSelector({ currentTheme, onThemeChange }: ThemeSele
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-white/50 backdrop-blur-md rounded-xl p-2 shadow-lg border border-white/30 w-64"
+          className="absolute top-16 right-0 bg-white/50 backdrop-blur-md rounded-xl p-2 shadow-lg border border-white/30 w-64"
         >
           <div className="grid grid-cols-2 gap-2">
             {themes.map((theme) => (

@@ -54,7 +54,7 @@ export default function Hero({ theme }: HeroProps) {
             >
               View My Work
             </Button> */}
-            <a href="/resume.pdf" download>
+            <a href="/Choon_Wei_Tong_CV.pdf" download>
               <Button
                 size="lg"
                 variant="outline"
