@@ -69,11 +69,14 @@ export default function Contact({ theme }: ContactProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
+    const body = new URLSearchParams({
+      "form-name": "contact",
+      ...formData,
+    }).toString()
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString(),
+      body: body,
     })
       .then(() => {
         alert("Message sent!")
