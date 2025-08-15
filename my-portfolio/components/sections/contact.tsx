@@ -136,7 +136,7 @@ export default function Contact({ theme }: ContactProps) {
       body.append(key, String(value))
     })
 
-    const endpoint = form.getAttribute("action") ?? form.action // fall back to current page URL
+    const endpoint = form.getAttribute("action") ?? form.action // post to static HTML endpoint for Forms
 
     fetch(endpoint, {
       method: "POST",
@@ -256,6 +256,7 @@ export default function Contact({ theme }: ContactProps) {
                   acceptCharset="UTF-8"
                   data-netlify="true"
                   netlify-honeypot="bot-field"
+                  action="/netlify-form-detect.html"
                   onSubmit={handleSubmit}
                   className="space-y-4"
                 >
