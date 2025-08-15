@@ -130,9 +130,18 @@ export default function Contact({ theme }: ContactProps) {
     const form = e.currentTarget
     const fd = new FormData(form)
 
-    fetch(form.getAttribute("action") || "/", {
+    // Netlify recommends URL-encoded body for AJAX forms without files
+    const body = new URLSearchParams()
+    fd.forEach((value, key) => {
+      body.append(key, String(value))
+    })
+
+    const endpoint = form.getAttribute("action") ?? form.action // fall back to current page URL
+
+    fetch(endpoint, {
       method: "POST",
-      body: fd,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
     })
       .then(async (res) => {
         if (!res.ok) {
@@ -247,7 +256,6 @@ export default function Contact({ theme }: ContactProps) {
                   acceptCharset="UTF-8"
                   data-netlify="true"
                   netlify-honeypot="bot-field"
-                  action="/"
                   onSubmit={handleSubmit}
                   className="space-y-4"
                 >
@@ -334,7 +342,7 @@ export default function Contact({ theme }: ContactProps) {
                   </h2>
                 </div>
                 <p id="success-desc" className={`${getTextColor()} opacity-90`}>
-                  Thanks for reaching out. I'll get back to you soon.
+                  Thanks for reaching out. I’ll get back to you soon.
                 </p>
                 <div className="mt-6 flex justify-end">
                   <Button ref={closeBtnRef} onClick={() => setOpen(false)} className={`${getButtonBg()} text-white`}>
