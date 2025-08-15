@@ -352,31 +352,3 @@ export default function Contact({ theme }: ContactProps) {
     </section>
   )
 }
-
-
-/*
-If Netlify still doesn't detect the form, add this static HTML file so the build bot always
-finds it at build-time (no JS, no React needed):
-
-Create: public/netlify-form-detect.html
---------------------------------------
-<!doctype html>
-<html>
-  <head><meta charset="utf-8" /><title>Netlify Form Detection</title></head>
-  <body>
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" accept-charset="UTF-8">
-      <input type="hidden" name="form-name" value="contact" />
-      <p style="display:none;">
-        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-      </p>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <textarea name="message"></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </body>
-</html>
-
-After adding this file, redeploy on Netlify. You should then see the "contact" form detected
-in the dashboard under Forms.
-*/
