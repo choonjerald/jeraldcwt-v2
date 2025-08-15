@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react"
 import type { ThemeType } from "@/components/theme-selector"
-
 
 interface ContactProps {
   theme: ThemeType
@@ -27,64 +25,63 @@ export default function Contact({ theme }: ContactProps) {
   const modalRef = useRef<HTMLDivElement>(null)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
   const previouslyFocusedRef = useRef<Element | null>(null)
+
+  // ESC to close, focus trap, and body scroll lock
   useEffect(() => {
-    const html = document.documentElement;
-    const body = document.body;
+    const html = document.documentElement
+    const body = document.body
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!open) return;
+      if (!open) return
       if (e.key === "Escape") {
-        e.preventDefault();
-        setOpen(false);
-        return;
+        e.preventDefault()
+        setOpen(false)
+        return
       }
       if (e.key === "Tab") {
-        const container = modalRef.current;
-        if (!container) return;
+        const container = modalRef.current
+        if (!container) return
         const focusable = container.querySelectorAll<HTMLElement>(
           'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusable.length === 0) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
         if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          (last as HTMLElement).focus();
+          e.preventDefault()
+          ;(last as HTMLElement).focus()
         } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          (first as HTMLElement).focus();
+          e.preventDefault()
+          ;(first as HTMLElement).focus()
         }
       }
-    };
+    }
 
     if (open) {
-      previouslyFocusedRef.current = document.activeElement;
-      body.style.overflow = "hidden";
-      html.style.overflow = "hidden";
-      document.addEventListener("keydown", handleKeyDown);
+      previouslyFocusedRef.current = document.activeElement
+      body.style.overflow = "hidden"
+      html.style.overflow = "hidden"
+      document.addEventListener("keydown", handleKeyDown)
       setTimeout(() => {
-        closeBtnRef.current?.focus();
-      }, 0);
+        closeBtnRef.current?.focus()
+      }, 0)
     } else {
-      body.style.overflow = "";
-      html.style.overflow = "";
-      document.removeEventListener("keydown", handleKeyDown);
+      body.style.overflow = ""
+      html.style.overflow = ""
+      document.removeEventListener("keydown", handleKeyDown)
       if (previouslyFocusedRef.current instanceof HTMLElement) {
-        previouslyFocusedRef.current.focus();
+        previouslyFocusedRef.current.focus()
       }
     }
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      body.style.overflow = "";
-      html.style.overflow = "";
-    };
-  }, [open]);
+      document.removeEventListener("keydown", handleKeyDown)
+      body.style.overflow = ""
+      html.style.overflow = ""
+    }
+  }, [open])
 
-  const getTextColor = () => {
-    if (theme === "night") return "text-white"
-    return "text-gray-800"
-  }
+  const getTextColor = () => (theme === "night" ? "text-white" : "text-gray-800")
 
   const getHighlightColor = () => {
     switch (theme) {
@@ -101,10 +98,7 @@ export default function Contact({ theme }: ContactProps) {
     }
   }
 
-  const getCardBg = () => {
-    if (theme === "night") return "bg-gray-900/30"
-    return "bg-white/30"
-  }
+  const getCardBg = () => (theme === "night" ? "bg-gray-900/30" : "bg-white/30")
 
   const getButtonBg = () => {
     switch (theme) {
@@ -121,10 +115,7 @@ export default function Contact({ theme }: ContactProps) {
     }
   }
 
-  const getModalBg = () => {
-    if (theme === "night") return "bg-gray-900"
-    return "bg-white"
-  }
+  const getModalBg = () => (theme === "night" ? "bg-gray-900" : "bg-white")
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -133,26 +124,30 @@ export default function Contact({ theme }: ContactProps) {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  // Robust URL-encoder (keeps parity with Netlify expectations)
-  const encode = (data: Record<string, string>) =>
-    Object.keys(data)
-      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&")
-
+  // Post with FormData to the form's action so Netlify intercepts it reliably
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const body = encode({ "form-name": "contact", ...formData })
+    const form = e.currentTarget
+    const fd = new FormData(form)
 
-    fetch("/", {
+    fetch(form.getAttribute("action") || "/", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body,
+      body: fd,
     })
-      .then(() => {
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text().catch(() => "")
+          console.error("Form submit failed:", res.status, text)
+          alert("Form submission failed. Check console for details.")
+          return
+        }
         setFormData({ name: "", email: "", message: "" })
-        setOpen(true);
+        setOpen(true)
       })
-      .catch((error) => alert(error))
+      .catch((error) => {
+        console.error(error)
+        alert("Network error while submitting form.")
+      })
   }
 
   return (
@@ -252,6 +247,7 @@ export default function Contact({ theme }: ContactProps) {
                   acceptCharset="UTF-8"
                   data-netlify="true"
                   netlify-honeypot="bot-field"
+                  action="/"
                   onSubmit={handleSubmit}
                   className="space-y-4"
                 >
@@ -327,6 +323,7 @@ export default function Contact({ theme }: ContactProps) {
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
+              ref={modalRef}
               className={`w-full max-w-md rounded-2xl shadow-lg ${getModalBg()}`}
             >
               <div className="p-6">
@@ -337,10 +334,10 @@ export default function Contact({ theme }: ContactProps) {
                   </h2>
                 </div>
                 <p id="success-desc" className={`${getTextColor()} opacity-90`}>
-                  Thanks for reaching out. I’ll get back to you soon.
+                  Thanks for reaching out. I'll get back to you soon.
                 </p>
                 <div className="mt-6 flex justify-end">
-                  <Button onClick={() => setOpen(false)} className={`${getButtonBg()} text-white`}>
+                  <Button ref={closeBtnRef} onClick={() => setOpen(false)} className={`${getButtonBg()} text-white`}>
                     Close
                   </Button>
                 </div>
